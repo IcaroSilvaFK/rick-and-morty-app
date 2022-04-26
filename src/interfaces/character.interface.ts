@@ -1,7 +1,7 @@
 export interface ICharacterProps {
   id: number;
   name: string;
-  species: string;
+  species: "Human" | "Alien";
   gender: string;
   location: {
     name: string;

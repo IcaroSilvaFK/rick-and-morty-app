@@ -2,10 +2,27 @@ import { useNavigate } from "react-router-dom";
 
 import { useCharacters } from "../../hooks/useCharachters";
 
+import {
+  MdSignalWifiStatusbar3Bar,
+  MdSignalWifiConnectedNoInternet0,
+  MdSignalWifiStatusbarConnectedNoInternet2,
+  MdPerson,
+} from "react-icons/md";
+import { FaRedditAlien } from "react-icons/fa";
+
 import { Error } from "../Error";
 import { Loading } from "../Loading";
 
-import { Container } from "./styles";
+import {
+  Container,
+  CardContainer,
+  ContainerContent,
+  Alive,
+  Dead,
+  Unknown,
+  ContainerSpecies,
+  Button,
+} from "./styles";
 
 export function Card() {
   const navigate = useNavigate();
@@ -23,33 +40,46 @@ export function Card() {
   return (
     <Container>
       {characters.map((element) => (
-        <div key={element.id}>
+        <CardContainer key={element.id}>
           <img src={element.image} alt={element.name} />
-          <div>
+          <ContainerContent>
             <strong>{element.name}</strong>
-            <div>
-              <span>{element.location.name}</span>
-              <span
-                className={
-                  element.status === "Alive"
-                    ? "alive"
-                    : element.status === "Dead"
-                    ? "dead"
-                    : element.status === "unknown"
-                    ? "unknown"
-                    : ""
-                }
-              >
-                {element.status}
-              </span>
+            <div className='container__status'>
+              <ContainerSpecies>
+                {element.species === "Human" ? (
+                  <>
+                    <MdPerson />
+                    {element.species}
+                  </>
+                ) : (
+                  <>
+                    <FaRedditAlien />
+                    {element.species}
+                  </>
+                )}
+              </ContainerSpecies>
+              {element.status === "Alive" ? (
+                <Alive>
+                  <MdSignalWifiStatusbar3Bar />
+                  <span>{element.status}</span>
+                </Alive>
+              ) : element.status === "Dead" ? (
+                <Dead>
+                  <MdSignalWifiConnectedNoInternet0 />
+                  <span>{element.status}</span>
+                </Dead>
+              ) : (
+                <Unknown>
+                  <MdSignalWifiStatusbarConnectedNoInternet2 />
+                  <span>{element.status}</span>
+                </Unknown>
+              )}
             </div>
-            <div>
-              <button onClick={() => navigate(`/character/${element.id}`)}>
-                more info for character
-              </button>
-            </div>
-          </div>
-        </div>
+            <Button onClick={() => navigate(`/character/${element.id}`)}>
+              more info from character
+            </Button>
+          </ContainerContent>
+        </CardContainer>
       ))}
     </Container>
   );
