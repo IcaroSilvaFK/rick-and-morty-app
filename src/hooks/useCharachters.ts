@@ -11,18 +11,15 @@ export function useCharacters() {
 
   function handleNextPage() {
     setPage((prev) => prev + 1);
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function handlePrevPage() {
     setPage((prev) => (prev > 0 ? prev - 1 : 1));
-  }
-  useEffect(() => {
-    const characters = sessionStorage.getItem("@characters");
 
-    if (characters) {
-      setCharacters(JSON.parse(characters));
-    }
-  }, []);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -31,13 +28,8 @@ export function useCharacters() {
         const response = await api.get("/character", {
           params: { page },
         });
-
         setLoading(false);
         setCharacters(response.data.results);
-        sessionStorage.setItem(
-          "@characters",
-          JSON.stringify(response.data.results)
-        );
       } catch (error) {
         setLoading(false);
         setError(true);
@@ -45,5 +37,5 @@ export function useCharacters() {
     })();
   }, [page]);
 
-  return { characters, loading, error, handleNextPage, handlePrevPage };
+  return { characters, loading, error, handleNextPage, handlePrevPage, page };
 }

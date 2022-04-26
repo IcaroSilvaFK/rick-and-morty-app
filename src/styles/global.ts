@@ -30,12 +30,19 @@ export const GlobalStyle = createGlobalStyle`
     --teal-300:#4FD1C5;
 
     --white:#fff;
+
+    --font-Merri: 'Merriweather', serif;
+    --font-Poppins: 'Poppins', sans-serif;
   }
 
   *{
     padding: 0;
     margin: 0;
     box-sizing: border-box
+  }
+
+  body,a,input,button{
+    font-family: var(--font-Poppins);
   }
 
   button,input{
@@ -45,5 +52,14 @@ export const GlobalStyle = createGlobalStyle`
 
   button{
     cursor: pointer;
+  }
+
+  ul,ol{
+    list-style: none;
+  }
+
+  a{
+    text-decoration: none;
+    color: inherit;
   }
 `;

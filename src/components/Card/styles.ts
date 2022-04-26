@@ -1,17 +1,9 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  gap: 20px;
-`;
-
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
-
+  width: 300px;
   gap: 5px;
 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
@@ -20,6 +12,14 @@ export const CardContainer = styled.div`
   img {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+
+    max-height: 250px;
+  }
+
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.1);
   }
 `;
 
@@ -29,9 +29,17 @@ export const ContainerContent = styled.div`
   align-items: center;
 
   gap: 5px;
-
+  flex-grow: 1;
   strong {
     font-size: 1.2rem;
+
+    width: 250px;
+    height: 25px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    text-align: center;
   }
   .container__status {
     width: 100%;
@@ -86,7 +94,7 @@ export const ContainerSpecies = styled.span`
   display: flex;
   align-items: center;
 
-  gap: 4px;
+  gap: 10px;
 `;
 
 export const Button = styled.button`
